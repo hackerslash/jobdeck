@@ -1,0 +1,33 @@
+# Stapply snapshot: https://storage.stapply.ai/jobs/v1/manifest.json (regenerated ~daily)
+manifest_url = "https://storage.stapply.ai/jobs/v1/manifest.json"
+
+# How often the background job checks the manifest for a new snapshot.
+sync_interval_minutes = 60
+
+# Jobs posted longer ago than this are dropped.
+max_age_days = 180
+
+# "tech" keeps only jobs the local classifier puts in a tech role family; "all" keeps everything.
+role_filter = "tech"
+
+# Local embedding model (sentence-transformers on Apple MPS / CPU, no API key). Changing it re-embeds everything.
+embedding_model = "BAAI/bge-small-en-v1.5"
+
+# Sources to ingest: any key under "by_ats" in the manifest. Add a line to add a source.
+sources = [
+  # startup / dev-native ATS and boards
+  "ashby", "lever", "greenhouse", "workable", "gem", "rippling", "pinpoint", "breezy",
+  "teamtailor", "personio", "recruitee", "softgarden", "join_com", "bamboohr", "jobvite",
+  "wellfound", "ycombinator", "weworkremotely", "builtin", "welcometothejungle",
+  "getonbrd", "manfred", "programathor", "mercor",
+  # enterprise ATS (big tech posts here; the tech filter removes the rest)
+  "workday", "smartrecruiters", "successfactors", "oracle", "icims", "phenom",
+  "jibe", "eightfold", "avature", "talentbrew",
+  # company career sites
+  "google", "meta", "apple", "amazon", "uber", "tesla", "tiktok", "bytedance",
+  # India
+  "keka", "darwinbox",
+]
+# Not enabled: government boards (eures, bundesagentur, jobbankca, mycareersfuture, arbetsformedlingen),
+# SMB payroll/HR (paylocity, paycom, ukg, dayforce, adp, ...), CJK-language sources (moka, beisen,
+# feishu_hire, jd, hrmos, herp, talentio, wantedly, wanted) until the classifier handles those languages.

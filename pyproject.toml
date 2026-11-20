@@ -1,0 +1,18 @@
+[project]
+name = "jobdeck"
+version = "0.1.0"
+description = "Local-first developer job search on the Stapply snapshot: local enrichment, plain-language search and resume match %"
+requires-python = ">=3.13"
+dependencies = [
+    "duckdb>=2.0.1",
+    "fastapi>=0.165.0",
+    "httpx>=0.28.1",
+    "numpy>=2.5.5",
+    "pyarrow>=26.0.1",
+    "pypdf>=7.1.1",
+    "python-docx>=1.2.0",
+    "python-multipart>=0.0.34",
+    "sentence-transformers>=6.3.0",
+    "torch>=2.15.0",
+    "uvicorn[standard]>=0.54.0",
+]

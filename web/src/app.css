@@ -1,0 +1,136 @@
+@import 'tailwindcss';
+@import '@fontsource-variable/geist';
+@import '@fontsource-variable/geist-mono';
+
+@theme {
+	--font-sans: 'Geist Variable', ui-sans-serif, system-ui, sans-serif;
+	--font-mono: 'Geist Mono Variable', ui-monospace, 'SF Mono', monospace;
+
+	--color-ink-0: #07090d;
+	--color-ink: #0b0e14;
+	--color-ink-2: #121722;
+	--color-ink-3: #1a2030;
+	--color-paper: #e6e8ee;
+	--color-muted: #8b93a7;
+	--color-dim: #7a8397;
+	--color-line: rgb(230 232 238 / 0.08);
+	--color-line-2: rgb(230 232 238 / 0.14);
+	--color-resolve: #7dd3a8;
+	--color-amber: #f2b544;
+	--color-conflict: #ef8a80;
+
+	--text-row: 0.8125rem;
+	--text-row--line-height: 1.25rem;
+	--ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@layer base {
+	html {
+		color-scheme: dark;
+		background: var(--color-ink-0);
+	}
+	body {
+		@apply font-sans text-row text-paper antialiased;
+		font-feature-settings: 'ss01', 'cv11';
+		background:
+			radial-gradient(1200px 700px at 12% -10%, rgb(125 211 168 / 0.11), transparent 60%),
+			radial-gradient(900px 600px at 95% 110%, rgb(242 181 68 / 0.08), transparent 60%),
+			var(--color-ink);
+		min-height: 100dvh;
+	}
+	::selection {
+		background: rgb(125 211 168 / 0.3);
+		color: var(--color-paper);
+	}
+	:focus-visible {
+		outline: 1.5px solid var(--color-resolve);
+		outline-offset: 2px;
+		border-radius: 4px;
+	}
+	input {
+		caret-color: var(--color-resolve);
+	}
+	* {
+		scrollbar-width: thin;
+		scrollbar-color: rgb(230 232 238 / 0.14) transparent;
+	}
+	a {
+		text-underline-offset: 3px;
+	}
+	.num {
+		font-family: var(--font-mono);
+		font-variant-numeric: tabular-nums;
+		letter-spacing: -0.01em;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	*,
+	::before,
+	::after {
+		transition-duration: 0.01ms !important;
+		animation-duration: 0.01ms !important;
+	}
+}
+
+@utility glass {
+	background: rgb(18 23 34 / 0.62);
+	backdrop-filter: blur(22px) saturate(150%);
+	-webkit-backdrop-filter: blur(22px) saturate(150%);
+	border: 1px solid rgb(230 232 238 / 0.08);
+}
+
+/* Job description (third-party markdown, sanitised before render) */
+.readme {
+	color: rgb(230 232 238 / 0.86);
+	font-size: 0.875rem;
+	line-height: 1.65;
+	max-width: 68ch;
+}
+.readme :where(h1, h2, h3, h4) {
+	color: var(--color-paper);
+	font-weight: 600;
+	font-size: 0.9375rem;
+	margin: 1.6em 0 0.5em;
+	letter-spacing: -0.01em;
+}
+.readme :where(p, ul, ol) {
+	margin: 0 0 0.9em;
+}
+.readme :where(ul) {
+	list-style: none;
+	padding-left: 1rem;
+}
+.readme :where(ul > li) {
+	position: relative;
+	margin: 0.25em 0;
+}
+.readme :where(ul > li)::before {
+	content: '';
+	position: absolute;
+	left: -0.85rem;
+	top: 0.72em;
+	width: 4px;
+	height: 1px;
+	background: var(--color-dim);
+}
+.readme :where(ol) {
+	padding-left: 1.2rem;
+	list-style: decimal;
+}
+.readme :where(strong) {
+	color: var(--color-paper);
+	font-weight: 600;
+}
+.readme :where(a) {
+	color: var(--color-resolve);
+	text-decoration: underline;
+	text-decoration-color: rgb(125 211 168 / 0.4);
+}
+.readme :where(code) {
+	font-family: var(--font-mono);
+	font-size: 0.8em;
+	background: var(--color-ink-3);
+	padding: 0.1em 0.35em;
+	border-radius: 4px;
+}

@@ -1,0 +1,53 @@
+# Local tag rules. Each tag is a DuckDB SQL boolean over a job's columns; edits apply on the next request.
+# Columns: id source company title role seniority posted apply_url location countries[] remote remote_region
+#          employment department team salary_usd_min salary_usd_max skills[] years_min visa equity relocation
+#          lang lang_required[] description
+# Functions: list_contains(skills, 'Rust'), list_has_any(skills, ['A','B']), regexp_matches(lower(title), '...')
+
+[[tag]]
+name = "new"
+where = "posted >= now() - INTERVAL 3 DAY"
+
+[[tag]]
+name = "remote-global"
+where = "remote = 'remote' AND remote_region = 'global'"
+
+[[tag]]
+name = "remote-eu"
+where = "remote = 'remote' AND remote_region = 'europe'"
+
+[[tag]]
+name = "visa"
+where = "visa"
+
+[[tag]]
+name = "relocation"
+where = "relocation"
+
+[[tag]]
+name = "equity"
+where = "equity"
+
+[[tag]]
+name = "200k+"
+where = "salary_usd_max >= 200000"
+
+[[tag]]
+name = "big-tech"
+where = "lower(company) IN ('google', 'meta', 'apple', 'amazon', 'microsoft', 'netflix', 'nvidia', 'uber', 'tesla', 'tiktok', 'bytedance', 'openai', 'anthropic', 'stripe', 'airbnb', 'salesforce', 'adobe')"
+
+[[tag]]
+name = "ai"
+where = "role = 'ml_ai' OR list_has_any(skills, ['LLMs', 'RAG', 'Agents', 'PyTorch', 'Fine-tuning'])"
+
+[[tag]]
+name = "early-career"
+where = "seniority IN ('intern', 'junior') OR years_min <= 2"
+
+[[tag]]
+name = "english-only"
+where = "lang = 'en' AND len(lang_required) = 0"
+
+[[tag]]
+name = "systems"
+where = "list_has_any(skills, ['Rust', 'C++', 'C', 'Golang', 'Zig'])"

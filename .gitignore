@@ -1,0 +1,12 @@
+data/
+.venv/
+__pycache__/
+web/node_modules/
+web/.svelte-kit/
+web/build/
+*.log
+logs/
+.impeccable/review/
+.impeccable/questions/
+.impeccable/build/
+.DS_Store

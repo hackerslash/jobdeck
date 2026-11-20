@@ -1,0 +1,148 @@
+{
+  "title": "Choose jobdeck's visual world",
+  "question": "The roll assigned the Registry. Keep it, take an alternate, or re-roll.",
+  "options": [
+    {
+      "id": "assigned",
+      "label": "The Registry",
+      "kicker": "THE ROLL",
+      "lineage": "npm / crates.io package pages, lockfiles, dependency trees",
+      "thesis": "Every job is a package: skills are its dependencies, and your resume will be the lockfile it resolves against.",
+      "palette": ["#0b0e14", "#e6e8ee", "#7dd3a8", "#f2b544", "#8b93a7"],
+      "materials": ["frosted glass panes over a dark ink field", "Geist + Geist Mono", "hairline grid"],
+      "viewport": "Search bar as a registry query; left rail of facets as package filters; dense result rows reading like `company / title@seniority`, skills as dependency chips, salary and age in tabular mono; glass detail pane opens on the right as the package page.",
+      "risk": "Metaphor can turn cute if package jargon leaks into labels; it must stay structural, not wordplay.",
+      "raised": [
+        {"from": "challenger-gate-board", "raise": "Rows rerank in place: when a filter or sort changes, rows slide to their new position instead of re-rendering, and new-since-last-visit rows hold an amber mark until seen."},
+        {"from": "challenger-ikeda", "raise": "Numbers are one tabular mono column grid; the selected row inverts instead of getting a soft highlight."},
+        {"from": "challenger-crouwel", "raise": "One visible 4px-based column grid shared by rail, list and pane; every cell snaps to it."},
+        {"from": "challenger-timetable", "raise": "List rank is carried by weight and color, never by size: one type size across the whole result list."}
+      ],
+      "wireframe": {"cols": 12, "rows": 10, "regions": [
+        {"label": "query bar", "x": 0, "y": 0, "w": 12, "h": 1, "accent": true},
+        {"label": "facet rail", "x": 0, "y": 1, "w": 2, "h": 9},
+        {"label": "result rows", "x": 2, "y": 1, "w": 5, "h": 9},
+        {"label": "glass package pane", "x": 7, "y": 1, "w": 5, "h": 9, "accent": true}
+      ]},
+      "comp": ".impeccable/mocks/decision/assigned.webp"
+    },
+    {
+      "id": "model-pick",
+      "label": "The Command Palette",
+      "kicker": "IMPECCABLE’S PICK",
+      "lineage": "Spotlight, Raycast, VS Code quick open",
+      "thesis": "The whole app is one floating glass palette: type, filter with tokens, arrow, enter.",
+      "palette": ["#0d0f13", "#f1f2f4", "#9aa4ff", "#5c6170"],
+      "materials": ["heavy vibrancy glass", "Geist", "keycap glyphs"],
+      "viewport": "A centered glass palette over a blurred field; filters typed as tokens (role:backend remote:global); results stream below; detail expands inline.",
+      "risk": "Familiar: this is where most dev-tool UIs land, and dense facet counts have nowhere to live.",
+      "wireframe": {"cols": 12, "rows": 10, "regions": [
+        {"label": "palette input + tokens", "x": 2, "y": 1, "w": 8, "h": 1, "accent": true},
+        {"label": "streamed results", "x": 2, "y": 2, "w": 8, "h": 5},
+        {"label": "inline detail", "x": 2, "y": 7, "w": 8, "h": 3}
+      ]},
+      "comp": ".impeccable/mocks/decision/model-pick.webp"
+    },
+    {
+      "id": "challenger-gate-board",
+      "label": "Departures Board",
+      "verdict": "competitive",
+      "lineage": "airport gate boards and boarding passes",
+      "thesis": "Fresh roles depart in posting order; the board reranks live and a changed row holds its alert color.",
+      "palette": ["#111316", "#f4f4f2", "#ffb000", "#e5484d"],
+      "materials": ["split-row board", "tabular figures", "segmented pass"],
+      "viewport": "Full-width board of rows in fixed columns (time, company, role, region, pay); the opened job renders as a segmented pass.",
+      "case": "Fuses cleanly on clarity (recency ordering is exactly triage) but developers don't identify with travel; loses on audience.",
+      "risk": "Novelty board look fights the glass brief.",
+      "hero": "https://impeccable.style/worlds/cards/vernacular-ephemera-boarding-pass-and-gate-board-hero.webp",
+      "wireframe": {"cols": 12, "rows": 10, "regions": [
+        {"label": "board header", "x": 0, "y": 0, "w": 12, "h": 1},
+        {"label": "departure rows", "x": 0, "y": 1, "w": 8, "h": 9, "accent": true},
+        {"label": "boarding pass", "x": 8, "y": 1, "w": 4, "h": 6}
+      ]},
+      "comp": ".impeccable/mocks/decision/challenger-gate-board.webp"
+    },
+    {
+      "id": "challenger-ikeda",
+      "label": "Datamatics Field",
+      "verdict": "declined",
+      "lineage": "Ryoji Ikeda data installations",
+      "palette": ["#000000", "#ffffff"],
+      "materials": ["barcode fields", "mono numerics"],
+      "thesis": "Jobs as a strobing black-and-white data field.",
+      "viewport": "Barcode columns per role family with numbers packed in margins.",
+      "case": "Fuses poorly: pure spectacle obscures the reading task and drops the pinned glass material.",
+      "risk": "Unreadable at triage speed.",
+      "kept": "Selection by inversion and strictly tabular mono numerics."
+    },
+    {
+      "id": "challenger-crouwel",
+      "label": "Grid Specimen",
+      "verdict": "declined",
+      "lineage": "Wim Crouwel grid posters",
+      "palette": ["#ffffff", "#1a1a1a", "#3b5bdb"],
+      "materials": ["visible construction grid"],
+      "thesis": "The layout grid is the design.",
+      "viewport": "Monumental grid letterforms over a small grotesk list.",
+      "case": "Fuses poorly: display letterforms have no job in a triage tool.",
+      "risk": "Poster, not tool.",
+      "kept": "One visible grid shared by every region."
+    },
+    {
+      "id": "challenger-timetable",
+      "label": "Timetable Slide Rack",
+      "verdict": "declined",
+      "lineage": "1971 pocket airline timetables",
+      "palette": ["#d9a62e", "#2f3a45", "#f3eedf", "#c8372d"],
+      "materials": ["tinted glass slides", "raked containers"],
+      "thesis": "One type size; rank by weight, case and rule.",
+      "viewport": "Raked glass slides on a lit goldenrod bed.",
+      "case": "Fuses poorly: the 11-degree rake costs scanning speed.",
+      "risk": "Raked rows are slower to read.",
+      "kept": "One type size in the list; rank by weight and color."
+    },
+    {
+      "id": "challenger-botanical",
+      "label": "Botanical Folio",
+      "verdict": "declined",
+      "lineage": "botanical plates",
+      "palette": ["#f3ecdc", "#3d6b3a", "#b8312f"],
+      "materials": ["cream plates", "sepia rules"],
+      "thesis": "One plant through its seasons at fixed scale.",
+      "viewport": "Five aligned plates.",
+      "case": "Fuses poorly: no developer identification, no triage task.",
+      "risk": "Wrong world.",
+      "kept": "Fixed-scale comparability: every row shows the same fields in the same cells."
+    },
+    {
+      "id": "challenger-mascots",
+      "label": "Character Catalog",
+      "verdict": "declined",
+      "lineage": "character goods catalogs",
+      "palette": ["#ffd6e0", "#c9f2e9", "#fff2b3"],
+      "materials": ["pastel cells", "rounded type"],
+      "thesis": "Companies as a ranked mascot roster.",
+      "viewport": "Pastel grid of rounded cells.",
+      "case": "Fuses poorly: playful register contradicts the minimal, dev-centric brief.",
+      "risk": "Cute over useful.",
+      "kept": "Each entry keeps its fixed furniture in fixed cells."
+    }
+  ],
+  "reroll": {"registers": ["safer", "bolder"]},
+  "buildPath": {"value": "code", "toggle": false},
+  "canon": true,
+  "canonCard": {
+    "label": "The category standard",
+    "thesis": "A clean job board: filter sidebar, card list, job page, executed impeccably.",
+    "palette": ["#ffffff", "#111827", "#2563eb"],
+    "materials": ["white cards", "system sans"],
+    "viewport": "Left filters, cards with logo/title/location/salary, detail on its own page.",
+    "risk": "Indistinguishable from LinkedIn/Indeed by design; drops the glass brief.",
+    "wireframe": {"cols": 12, "rows": 10, "regions": [
+      {"label": "top nav", "x": 0, "y": 0, "w": 12, "h": 1},
+      {"label": "filters", "x": 0, "y": 1, "w": 3, "h": 9},
+      {"label": "job cards", "x": 3, "y": 1, "w": 9, "h": 9}
+    ]}
+  },
+  "steer": true
+}
