@@ -7,7 +7,7 @@ from pathlib import Path
 from typing import Annotated
 
 from fastapi import Depends, FastAPI, File, Form, HTTPException, Query, Request, UploadFile
-from fastapi.responses import FileResponse
+from fastapi.responses import FileResponse, Response
 from fastapi.staticfiles import StaticFiles
 
 from . import config, db, embed, nlq, pipeline, resume, sync
@@ -207,6 +207,24 @@ def jobs(f: Filters, sort: str = "newest", offset: int = 0, limit: int = Query(5
     cur = c.execute(f"SELECT {LIST_COLS} FROM {src} {w} ORDER BY {order} LIMIT ? OFFSET ?", sa + wa + [limit, offset])
     cols = [d[0] for d in cur.description]
     return {"total": total, "took_ms": round((time.time() - t0) * 1000), "jobs": [dict(zip(cols, r)) for r in cur.fetchall()]}
+
+
+@app.get("/api/export")
+def export(f: Filters, sort: str = "newest"):
+    """Every job matching the current filters as CSV, apply links included."""
+    import csv, io
+    c = ready()
+    src, sa = f.source_sql()
+    w, wa = f.where()
+    order = SORTS.get(sort if (sort != "relevance" or f.q) else "newest", SORTS["newest"])
+    rows = c.execute(f"""SELECT title, company, location, remote, match_pct, match_resume, salary_usd_min, salary_usd_max,
+                                strftime(posted, '%Y-%m-%d'), apply_url FROM {src} {w} ORDER BY {order} LIMIT 10000""", sa + wa).fetchall()
+    buf = io.StringIO()
+    out = csv.writer(buf)
+    out.writerow(["title", "company", "location", "remote", "match_pct", "best_resume", "pay_usd_min", "pay_usd_max", "posted", "apply_url"])
+    out.writerows(rows)
+    return Response(buf.getvalue(), media_type="text/csv",
+                    headers={"Content-Disposition": f'attachment; filename="jobdeck-{time.strftime("%Y%m%d")}.csv"'})
 
 
 _facet_cache: dict = {}

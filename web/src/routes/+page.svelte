@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { RefreshCw, Search, Settings, Sparkles, X } from '@lucide/svelte';
+	import { Download, RefreshCw, Search, Settings, Sparkles, X } from '@lucide/svelte';
 	import { onMount, tick } from 'svelte';
 	import { flip } from 'svelte/animate';
 	import { fade } from 'svelte/transition';
@@ -298,7 +298,15 @@
 						{c.text}<X size={11} class="opacity-50 group-hover:opacity-100" />
 					</button>
 				{/each}
-				<div class="ml-auto flex overflow-hidden rounded-md border border-line text-[11px]">
+				<a
+					href="/api/export?{toParams(filters)}"
+					download
+					class="ml-auto inline-flex items-center gap-1 rounded-md border border-line px-2 py-1 text-[11px] text-muted transition-colors hover:text-paper {total ? '' : 'pointer-events-none opacity-30'}"
+					title="Download every matching job with its apply link (CSV, up to 10,000)"
+				>
+					<Download size={12} /> Export {total > 10000 ? '10k' : total.toLocaleString()}
+				</a>
+				<div class="flex overflow-hidden rounded-md border border-line text-[11px]">
 					{#each [['match', 'match'], ['relevance', 'relevance'], ['newest', 'newest'], ['salary', 'pay'], ['company', 'company']] as [v, t] (v)}
 						<button
 							class="px-2 py-1 transition-colors {filters.sort === v ? 'bg-paper text-ink' : 'text-muted hover:text-paper'} disabled:opacity-30"
